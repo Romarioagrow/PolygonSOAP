@@ -3,6 +3,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import polygon.repos.Role;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
@@ -17,6 +18,14 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
 
+    public User(String username, String password, LocalDateTime registrationDate) {
+        this.username = username;
+        this.password = password;
+        this.registrationDate = registrationDate;
+    }
+
+    private LocalDateTime registrationDate;
+
     // Автоподгрузка полей сразу
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     // Создать собственную таблицу для ролей и связать ее с текущей через столбец user_id
@@ -27,7 +36,6 @@ public class User implements UserDetails {
     // Сообщения пользователя
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private Set<Message> messages;
-
 
     //////////////////////////////////
 
@@ -119,5 +127,13 @@ public class User implements UserDetails {
     }
 
     public <T> void setRoles(Set<T> singleton, Set<T> singleton1) {
+    }
+
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

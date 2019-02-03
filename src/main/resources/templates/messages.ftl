@@ -25,8 +25,19 @@
         <div class="form-group mt-3">
             <!-- Форма отправки сообщений -->
             <form method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="text" placeholder="Enter message"/>
+                <!--<div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Your Message</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                </div>-->
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Your Message</span>
+                    </div>
+                    <textarea class="form-control" name="text" aria-label="With textarea" placeholder="Type something..."></textarea>
+                    <!--<input type="text" class="form-control" name="text" placeholder="Enter message"/>-->
                 </div>
 
                 <div class="form-group">
@@ -50,23 +61,31 @@
 
     <!-- Разметка столбцов для отображения контента-карточек-->
     <div class="card-columns">
-        <#list messages as message>
-            <div class="card my-3"">
-                <#if message.filename??>
-                    <img src="/img/${message.filename}" class="card-img-top">
-                </#if>
+    <#list messages as message>
+        <div class="card my-3"">
+        <#if message.filename??>
+            <img src="/img/${message.filename}" class="card-img-top">
+        </#if>
 
-                <div class="m-2">
-                    <span>${message.text}</span>
-                    <i>${message.tag}</i>
-                </div>
-
-                <div class="card-footer text-muted">
-                    ${message.authorName}
-                </div>
+        <div class="m-2">
+                <span>${message.text}</span>
+                <i>${message.tag}</i>
             </div>
-        <#else>
-            No Messages!
-        </#list>
-    </div>
+
+            <div class="card-footer text-muted">
+                ${message.authorName}
+            </div>
+            <table>
+                <tr><a href="#" class="card-link">Edit message</a></tr>
+                <tr><a href="#" class="card-link">Delete message</a></tr>
+            </table>
+        </div>
+    <#else>
+        No Messages!
+    </#list>
+
+    <div><a href="#" class="card-link">Card link</a></div>
+
+    <div><a href="#" class="card-link">Another link</a></div>
+
 </@c.page>
