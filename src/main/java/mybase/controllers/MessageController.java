@@ -1,4 +1,4 @@
-package polygon.controllers;
+package mybase.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import polygon.entities.Message;
-import polygon.entities.User;
-import polygon.repos.MessageRepo;
+import mybase.entities.Message;
+import mybase.entities.User;
+import mybase.repos.MessageRepo;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;

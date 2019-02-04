@@ -33,6 +33,12 @@
                     <a class="nav-link" href="/user">All Users</a>
                 </li>
             </#if>
+
+            <#if isAdmin>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/profile">My profile</a>
+                </li>
+            </#if>
         </ul>
 
         <!-- Имя пользователя-->

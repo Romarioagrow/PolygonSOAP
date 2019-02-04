@@ -11,8 +11,8 @@
     <groupId>polygon</groupId>
     <artifactId>polygon</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>polygon</name>
-    <description>projects polygon</description>
+    <name>mybase</name>
+    <description>projects mybase</description>
 
     <properties>
         <java.version>1.8</java.version>

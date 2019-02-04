@@ -68,24 +68,19 @@
         </#if>
 
         <div class="m-2">
-                <span>${message.text}</span>
-                <i>${message.tag}</i>
-            </div>
+            <span>${message.text}</span>
+            <i>${message.tag}</i>
+        </div>
 
-            <div class="card-footer text-muted">
-                ${message.authorName}
-            </div>
-            <table>
-                <tr><a href="#" class="card-link">Edit message</a></tr>
-                <tr><a href="#" class="card-link">Delete message</a></tr>
-            </table>
+        <div class="card-footer text-muted">
+            ${message.authorName}
+        </div>
+        <table>
+            <tr><a href="#" class="card-link">Edit message</a></tr>
+            <tr><a href="#" class="card-link">Delete message</a></tr>
+        </table>
         </div>
     <#else>
         No Messages!
     </#list>
-
-    <div><a href="#" class="card-link">Card link</a></div>
-
-    <div><a href="#" class="card-link">Another link</a></div>
-
 </@c.page>

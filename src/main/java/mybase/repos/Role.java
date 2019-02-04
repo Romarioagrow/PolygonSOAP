@@ -1,4 +1,4 @@
-package polygon.repos;
+package mybase.repos;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {

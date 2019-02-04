@@ -1,7 +1,7 @@
-package polygon.entities;
+package mybase.entities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import polygon.repos.Role;
+import mybase.repos.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;

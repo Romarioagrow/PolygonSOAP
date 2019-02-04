@@ -1,4 +1,4 @@
-package polygon.entities;
+package mybase.entities;
 import javax.persistence.*;
 
 @Entity
