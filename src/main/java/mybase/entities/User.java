@@ -1,10 +1,12 @@
 package mybase.entities;
+import mybase.entities.vk.VKUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import mybase.repos.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,7 +39,17 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private Set<Message> messages;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<VKUser> VK_profile;
+
+
     //////////////////////////////////
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User() {}
 
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
@@ -58,14 +70,6 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isActive();
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public User() {
     }
 
     @Override
@@ -136,4 +140,5 @@ public class User implements UserDetails {
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
+
 }

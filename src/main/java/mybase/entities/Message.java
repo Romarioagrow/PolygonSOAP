@@ -1,8 +1,9 @@
 package mybase.entities;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Message {
+public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,6 +17,8 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User author;
 
+
+    //////////////////////////////////
     // Проверка автора сообщения
     public String getAuthorName() {
         return author !=null ? author.getUsername() : "unknown";
@@ -26,6 +29,8 @@ public class Message {
         this.text = text;
         this.tag = tag;
     }
+
+    public Message() {}
 
     public String getText() {
         return text;
@@ -43,7 +48,6 @@ public class Message {
         this.filename = filename;
     }
 
-    public Message() {}
     public Long getId() {
         return id;
     }
