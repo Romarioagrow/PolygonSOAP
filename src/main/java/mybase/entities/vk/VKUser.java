@@ -1,6 +1,7 @@
 package mybase.entities.vk;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "VK_profile")
@@ -17,17 +18,70 @@ public class VKUser implements Serializable {
     private String city;
     private Integer age;
 
-    /*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "friends_list_id")
-    private VKFriendsList vkfriends;
+    // Список друзей пользователя
+    @ManyToMany
+    @JoinTable(name="vk_friends",
+            joinColumns=@JoinColumn(name="userId"),
+            inverseJoinColumns=@JoinColumn(name="friendId")
+    )
+    private List<VKUser> friendsList;
 
-    public VKFriendsList getVkfriends() {
-        return vkfriends;
+    // Пользователь является одним из друзей у пользователя Х
+    @ManyToMany
+    @JoinTable(name="vk_friends",
+            joinColumns=@JoinColumn(name="friendId"),
+            inverseJoinColumns=@JoinColumn(name="userId")
+    )
+    private List<VKUser> friendOf;
+
+    // Подписчики пользователя
+    @ManyToMany
+    @JoinTable(name="vk_followers",
+            joinColumns=@JoinColumn(name="userId"),
+            inverseJoinColumns=@JoinColumn(name="followerId")
+    )
+    private List<VKUser> followersList; // дружит с
+
+    // Подписки ползьователя
+    @ManyToMany
+    @JoinTable(name="vk_followers",
+            joinColumns=@JoinColumn(name="followerId"),
+            inverseJoinColumns=@JoinColumn(name="userId")
+    )
+    private List<VKUser> following; // является другом для
+
+
+    public List<VKUser> getFriendsList() {
+        return friendsList;
     }
 
-    public void setVkfriends(VKFriendsList vkfriends) {
-        this.vkfriends = vkfriends;
-    }*/
+    public void setFriendsList(List<VKUser> friendsList) {
+        this.friendsList = friendsList;
+    }
+
+    public List<VKUser> getFriendOf() {
+        return friendOf;
+    }
+
+    public void setFriendOf(List<VKUser> friendOf) {
+        this.friendOf = friendOf;
+    }
+
+    public List<VKUser> getFollowersList() {
+        return followersList;
+    }
+
+    public void setFollowersList(List<VKUser> followersList) {
+        this.followersList = followersList;
+    }
+
+    public List<VKUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<VKUser> following) {
+        this.following = following;
+    }
 
     public VKUser() {
     }

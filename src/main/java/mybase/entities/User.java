@@ -40,6 +40,7 @@ public class User implements UserDetails {
     private Set<Message> messages;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
     private List<VKUser> VK_profile;
 
 

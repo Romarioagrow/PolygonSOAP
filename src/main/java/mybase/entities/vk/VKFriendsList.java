@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 //@Entity
 public class VKFriendsList {
+
+    /*@Id
+    @Column(name = "friends_list_id")
+    @OneToOne(optional = false, mappedBy = "vkfriends")
+    private Long id;
+
+
+    private ArrayList<VKUser> friends_list;
+
     /*@Id
     @Column(name = "profile_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
