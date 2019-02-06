@@ -14,7 +14,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private long id;
     private String username;
     private String password;
@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private Set<Message> messages;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_id")
+    @JoinColumn(name = "vk_id")
     private List<VKUser> VK_profile;
 
 

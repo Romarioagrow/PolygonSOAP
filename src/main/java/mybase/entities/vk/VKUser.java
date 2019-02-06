@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "VK_profile")
+@Table(name = "vk_usr")
 public class VKUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long profile_id;
+    private Long vk_id;
 
     @JoinColumn(name = "user_id")
     private Long user_id;
@@ -35,7 +35,7 @@ public class VKUser implements Serializable {
     private List<VKUser> friendOf;
 
     // Подписчики пользователя
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(name="vk_followers",
             joinColumns=@JoinColumn(name="userId"),
             inverseJoinColumns=@JoinColumn(name="followerId")
@@ -48,7 +48,7 @@ public class VKUser implements Serializable {
             joinColumns=@JoinColumn(name="followerId"),
             inverseJoinColumns=@JoinColumn(name="userId")
     )
-    private List<VKUser> following; // является другом для
+    private List<VKUser> following; // является другом для*/
 
 
     public List<VKUser> getFriendsList() {
@@ -67,7 +67,7 @@ public class VKUser implements Serializable {
         this.friendOf = friendOf;
     }
 
-    public List<VKUser> getFollowersList() {
+    /*public List<VKUser> getFollowersList() {
         return followersList;
     }
 
@@ -81,17 +81,17 @@ public class VKUser implements Serializable {
 
     public void setFollowing(List<VKUser> following) {
         this.following = following;
-    }
+    }*/
 
     public VKUser() {
     }
 
-    public Long getProfile_id() {
-        return profile_id;
+    public Long getVk_id() {
+        return vk_id;
     }
 
-    public void setProfile_id(Long profile_id) {
-        this.profile_id = profile_id;
+    public void setVk_id(Long vk_id) {
+        this.vk_id = vk_id;
     }
 
     public Long getUser_id() {
