@@ -43,7 +43,6 @@
 
         <!-- Имя пользователя-->
         <div class="navbar-text mr-3">Sir ${name}</div>
-
         <#if isAdmin>
             <@l.logout/>
         </#if>

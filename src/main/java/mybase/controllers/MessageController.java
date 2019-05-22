@@ -13,6 +13,7 @@ import mybase.entities.User;
 import mybase.repos.MessageRepo;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -21,7 +22,7 @@ public class MessageController {
     private MessageRepo messageRepo;
 
     // Путь поиска выкладываемых изображений
-    @Value("${upload.path}")
+    @Value("${C:/Users/Rescue/Dropbox/IT/Projects/IdeaProjects/myBase/upload}")
     private String uploadPath;
 
     // Отобразить список сообщений
@@ -30,10 +31,10 @@ public class MessageController {
             @AuthenticationPrincipal User user,
             Model model)
     {
-        Iterable<Message> messages = messageRepo.findByAuthor(user);
+        List<Message> messages = messageRepo.findByAuthor(user);
+        messages.sort(Comparator.comparing(Message::getDate).reversed());
 
         model.addAttribute("messages", messages);
-
         return "messages";
     }
 
@@ -66,13 +67,12 @@ public class MessageController {
             message.setFilename(resultFileName);
         }
 
-        // Сохранить сообщение в БД
+        message.setDate(LocalDateTime.now());
         messageRepo.save(message);
 
-        Iterable<Message> messages = messageRepo.findByAuthor(user);
-
+        List<Message> messages = messageRepo.findByAuthor(user);
+        messages.sort(Comparator.comparing(Message::getDate).reversed());
         model.put("messages", messages);
-
         return "messages";
     }
 

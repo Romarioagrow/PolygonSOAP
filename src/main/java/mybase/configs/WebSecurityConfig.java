@@ -15,16 +15,13 @@ import mybase.services.UserService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
-
     // Разрешения доступа
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 // Корень, регистрация и статик контент без авторизации
                 .authorizeRequests()
-                    .antMatchers(//"/",
-                            "/registration",
-                            "/static/**").permitAll()
+                    .antMatchers("/registration", "/static/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -44,14 +41,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 }
-
-/*
-auth.jdbcAuthentication()
-                // Подключиться к БД
-                .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                // Найти пользователя в бд по имени
-                .usersByUsernameQuery("select username, password, active from usr where username=?")
-                // Получить список пользователей с ролями (Из таблицы usr и присоедененной к ней таблицей user_role через поле user_id и= id выбрать поля username и имя роли
-                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.id = ur.user_id where u.username=? ");
-*/

@@ -1,8 +1,18 @@
 package mybase.entities;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
+@Log
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,14 +22,12 @@ public class Message implements Serializable {
     private String tag;
     private String filename;
 
-    // Подключать автора сразу
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
 
+    private LocalDateTime date;
 
-    //////////////////////////////////
-    // Проверка автора сообщения
     public String getAuthorName() {
         return author !=null ? author.getUsername() : "unknown";
     }
@@ -30,24 +38,26 @@ public class Message implements Serializable {
         this.tag = tag;
     }
 
-    public Message() {}
+    //public Message() {}
 
+    /*public LocalDateTime getDate() {
+        return date;
+    }
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
     public String getText() {
         return text;
     }
-
     public String getTag() {
         return tag;
     }
-
     public String getFilename() {
         return filename;
     }
-
     public void setFilename(String filename) {
         this.filename = filename;
     }
-
     public Long getId() {
         return id;
     }
@@ -68,5 +78,5 @@ public class Message implements Serializable {
     }
     public void setAuthor(User author) {
         this.author = author;
-    }
+    }*/
 }

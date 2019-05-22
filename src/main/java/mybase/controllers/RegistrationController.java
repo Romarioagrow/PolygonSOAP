@@ -20,13 +20,13 @@ public class RegistrationController {
 
     // Добавить нового пользователя
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model) {
-        if (!userService.addUser(user)) {
+    public String addUser(User user, Map<String, Object> model)
+    {
+        if (!userService.addUser(user))
+        {
             model.put("message", "User exists!");
-
             return "registration";
         }
-
         return "redirect:/login";
     }
 }

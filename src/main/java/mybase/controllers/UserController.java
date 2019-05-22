@@ -22,19 +22,16 @@ public class UserController {
     @GetMapping
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
-
         return "userList";
     }
 
     // Редактировать пользователя
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
-    public String userEdit(
-            @PathVariable User user, Model model)
+    public String userEdit(@PathVariable User user, Model model)
     {
         model.addAttribute( "user", user);
         model.addAttribute("roles", Role.values());
-
         return "userEdit";
     }
 
@@ -47,7 +44,6 @@ public class UserController {
             @RequestParam("userId") User user)
     {
         userService.saveUser(user, username, form);
-
         return "redirect:/user";
     }
 
@@ -55,7 +51,6 @@ public class UserController {
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("password", user.getPassword());
-
         return "profile";
     }
 
@@ -66,7 +61,6 @@ public class UserController {
             @RequestParam String password
     ){
         userService.updateProfile(user, username, password);
-
         return "redirect:/user/profile";
     }
 }

@@ -22,17 +22,13 @@ public class MainController {
             @AuthenticationPrincipal User user,
             @RequestParam(name="name", required=false, defaultValue="Sir")
             String name, Map<String, Object> model)
-
     {
         // Отобразить имя пользователя
         if (user.getUsername() != null && !user.getUsername().isEmpty()) {
             String userName = user.getUsername();
             model.put("userName", userName);
         }
-        else {
-            model.put("userName", "Sir");
-        }
-
+        else model.put("userName", "Sir");
         return "main";
     }
 
@@ -43,9 +39,7 @@ public class MainController {
             @RequestParam String lastName,
             @RequestParam String city,
             @RequestParam Integer age
-
     ){
-
         VKUser vkUser = new VKUser();
         vkUser.setFirstName(firstName);
         vkUser.setLastName(lastName);
@@ -54,9 +48,6 @@ public class MainController {
         vkUser.setUser_id(user.getId());
 
         vkRepo.save(vkUser);
-
         return "main";
     }
-
-
 }
