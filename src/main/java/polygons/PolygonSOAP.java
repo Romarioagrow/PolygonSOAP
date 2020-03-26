@@ -4,9 +4,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 
 @SpringBootApplication(exclude = EmbeddedMongoAutoConfiguration.class)
-public class MyBase {
+public class PolygonSOAP {
     public static void main(String[] args) {
-        SpringApplication.run(MyBase.class, args);
+        SpringApplication.run(PolygonSOAP.class, args);
     }
 }
 
