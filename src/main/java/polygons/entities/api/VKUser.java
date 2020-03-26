@@ -1,4 +1,4 @@
-package mybase.entities.vk;
+package polygons.entities.api;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;

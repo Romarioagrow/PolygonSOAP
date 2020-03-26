@@ -7,7 +7,6 @@
         name = user.getUsername()
         isAdmin = user.isAdmin()
         isUser = user.isUser()
-
     >
 <#else>
     <#assign

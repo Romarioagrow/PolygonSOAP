@@ -1,4 +1,4 @@
-package mybase.entities;
+package polygons.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

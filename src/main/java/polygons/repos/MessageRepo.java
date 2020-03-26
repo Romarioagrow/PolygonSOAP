@@ -1,7 +1,7 @@
-package mybase.repos;
+package polygons.repos;
 import org.springframework.data.repository.CrudRepository;
-import mybase.entities.Message;
-import mybase.entities.User;
+import polygons.entities.Message;
+import polygons.entities.User;
 
 import java.util.List;
 

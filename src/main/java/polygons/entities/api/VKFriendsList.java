@@ -1,6 +1,4 @@
-package mybase.entities.vk;
-import javax.persistence.*;
-import java.util.ArrayList;
+package polygons.entities.api;
 
 //@Entity
 public class VKFriendsList {

@@ -1,23 +1,25 @@
-package mybase.controllers;
-import org.springframework.beans.factory.annotation.Autowired;
+package polygons.controllers;
+
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import mybase.entities.User;
-import mybase.repos.Role;
-import mybase.services.UserService;
+import polygons.entities.User;
+import polygons.repos.Role;
+import polygons.services.UserService;
+
 import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
-// @PreAuthorize("hasAuthority('ADMIN')") // Проверка наличия прав доступа у пользователей к контроллеру
+@AllArgsConstructor
+///@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    // Отобразить сообщения пользователя
+    /*Отобразить сообщения пользователя*/
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userList(Model model) {
@@ -25,7 +27,7 @@ public class UserController {
         return "userList";
     }
 
-    // Редактировать пользователя
+    /*Редактировать пользователя*/
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEdit(@PathVariable User user, Model model)
@@ -35,7 +37,7 @@ public class UserController {
         return "userEdit";
     }
 
-    // Сохранить пользователя в БД
+    /*Сохранить пользователя в БД*/
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userSave(

@@ -1,15 +1,13 @@
-package mybase.entities;
+package polygons.entities;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import mybase.entities.vk.VKUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import mybase.repos.Role;
+import polygons.repos.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -23,6 +21,7 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private long id;
     private String username;
+
     private String password;
     private boolean active;
     private LocalDateTime registrationDate;
@@ -53,7 +52,9 @@ public class User implements UserDetails {
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
     }
-    public boolean isUser() { return roles.contains(Role.USER);}
+    public boolean isUser() {
+        return roles.contains(Role.USER);
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();

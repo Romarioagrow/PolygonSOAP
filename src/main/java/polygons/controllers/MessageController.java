@@ -1,5 +1,5 @@
-package mybase.controllers;
-import org.springframework.beans.factory.annotation.Autowired;
+package polygons.controllers;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -8,29 +8,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import mybase.entities.Message;
-import mybase.entities.User;
-import mybase.repos.MessageRepo;
+import polygons.entities.Message;
+import polygons.entities.User;
+import polygons.repos.MessageRepo;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@Log
 @Controller
 public class MessageController {
-    @Autowired
-    private MessageRepo messageRepo;
+    private final MessageRepo messageRepo;
 
-    // Путь поиска выкладываемых изображений
-    @Value("${C:/Users/Rescue/Dropbox/IT/Projects/IdeaProjects/myBase/upload}")
+    public MessageController(MessageRepo messageRepo) {
+        this.messageRepo = messageRepo;
+    }
+
+    /*Путь поиска выкладываемых изображений*/
+    @Value("${upload.path}")
     private String uploadPath;
+    /// private static final String uploadPATH = "D:\\Storage\\Dev\\Projects\\IdeaProject\\UNIQUE\\PolygonSOAP\\src\\main\\resources\\static\\img\\posts";
 
-    // Отобразить список сообщений
+    /* Отобразить список сообщений*/
     @GetMapping("/messages")
     public String listMessages(
-            @AuthenticationPrincipal User user,
-            Model model)
-    {
+            Model model,
+            @AuthenticationPrincipal User user
+
+    ){
         List<Message> messages = messageRepo.findByAuthor(user);
         messages.sort(Comparator.comparing(Message::getDate).reversed());
 
@@ -38,7 +44,7 @@ public class MessageController {
         return "messages";
     }
 
-    // Отправить сообщение
+    /*Сохранить новый пост*/
     @PostMapping("/messages")
     public String postMessage(
             @AuthenticationPrincipal User user,
@@ -47,10 +53,12 @@ public class MessageController {
             @RequestParam("file") MultipartFile file
     ) throws IOException
     {
+        log.info("Upload post path: " + uploadPath);
+
         Message message = new Message(text, tag, user);
 
-        // Добавление файла
-        // Проверка директории файла
+        /*Добавление файла
+        Проверка директории файла*/
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -58,13 +66,14 @@ public class MessageController {
                 uploadDir.mkdir();
             }
 
-            // Присовить файлу уникальное имя
+            /*Присовить файлу уникальное имя*/
             String uuidFile = UUID.randomUUID().toString();
             String resultFileName = uuidFile + "." + file.getOriginalFilename();
-            // Переименовать файл
-            file.transferTo(new File(uploadPath + "/" + resultFileName));
 
+            /*Переименовать файл*/
+            file.transferTo(new File(uploadPath + "/" + resultFileName));
             message.setFilename(resultFileName);
+            log.info("Result file name: " + resultFileName);
         }
 
         message.setDate(LocalDateTime.now());
@@ -76,7 +85,7 @@ public class MessageController {
         return "messages";
     }
 
-    // Переадресовать и отобразить список пользователей
+    /*Переадресовать и отобразить список пользователей*/
     @PostMapping("allUsers")
     public String allUsers() {
         return "redirect:/users/all";

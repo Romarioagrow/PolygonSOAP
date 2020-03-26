@@ -1,4 +1,4 @@
-package mybase.entities.google;
+package polygons.entities.api;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 

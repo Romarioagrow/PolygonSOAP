@@ -1,10 +1,12 @@
 <#include "security.ftl">
-<#import "login.ftl" as l>
+<#import "loginForm.ftl" as l>
 
 <!-- Подгонка навпанели под экран и цветовая схема-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!-- Название проекта-->
-    <a class="navbar-brand" href="/"><h1>myBase</h1></a>
+    <a class="navbar-brand" href="/">
+        <h1>Polygon S</h1>
+    </a>
 
     <!-- Конопка меню на маленьких экранах-->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
